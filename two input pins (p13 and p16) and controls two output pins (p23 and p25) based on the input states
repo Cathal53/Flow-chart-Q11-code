@@ -1,0 +1,35 @@
+#include "mbed.h"
+
+// Define DigitalIn and DigitalOut objects
+DigitalIn p13(p13);
+DigitalIn p16(p16);
+DigitalOut p23(p23);
+DigitalOut p25(p25);
+
+int main() {
+    // Initialize DigitalIn and DigitalOut
+    p13.mode(PullUp); // Configure p13 with pull-up resistor
+    p16.mode(PullUp); // Configure p16 with pull-up resistor
+    
+    // Ensure the initial state
+    p23 = 0;
+    p25 = 0; 
+    
+    while (1) {
+        // Check if p13 is pressed
+        if (p13 == 0) { // Assuming a button press pulls the pin to ground (active low)
+            p23 = 1; // Turn on p23
+            p25 = 0; // Turn off p25
+        } 
+        // Check if p16 is pressed
+        else if (p16 == 0) { // Assuming a button press pulls the pin to ground (active low)
+            p25 = 1; // Turn on p25
+            p23 = 0; // Turn off p23
+        } 
+        // No button pressed
+        else {
+            p23 = 0; // Turn off p23
+            p25 = 0; // Turn off p25
+        }
+    }
+}
